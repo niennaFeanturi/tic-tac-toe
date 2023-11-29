@@ -15,6 +15,7 @@ const createGame = async ({ creator, opponent }) => {
       user2: opponent.username,
       row: 0,
       column: 0,
+      entry: "",
       lastMoveBy: creator
     }
   };

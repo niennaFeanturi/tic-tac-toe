@@ -85,7 +85,7 @@ app.post("/games/:gameId", wrapAsync(async (req, res) => {
     username: token['cognito:username'],
     phoneNumber: token['phone_number']
   }
-  await handlePostMoveNotification({ game, mover, opponent })
+  await handlePostMoveNotification({ board, mover, opponent })
   res.json(game);
 }));
 
