@@ -5,10 +5,16 @@ const documentClient = new AWS.DynamoDB.DocumentClient();
 
 const fetchGame = async gameId => {
   const params = {
-    TableName: "turn-based-game",
-    Key: {
-      gameId: gameId
-    }
+    TableName: "tictactoe-db",
+    KeySchema: [
+      {AttributeName: "gameId", KeyType: "HASH"},
+      {AttributeName: "moveId", KeyType: "RANGE"}
+    ],
+
+    AttributeDefinitions: [
+      {AttributeName: "gameId", AttributeType: "S"},
+      {AttributeName: "moveId", AttributeType: "N"}
+    ]
   };
 
   try {

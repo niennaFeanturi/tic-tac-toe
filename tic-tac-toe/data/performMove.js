@@ -1,32 +1,28 @@
-// Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0
 const AWS = require("aws-sdk");
 const documentClient = new AWS.DynamoDB.DocumentClient();
 
-const performMove = async ({ gameId, user, changedHeap, changedHeapValue }) => {
-  if (changedHeapValue < 0) {
-    throw new Error("Cannot set heap value below 0");
-  }
+const performMove = async ({ gameId, user, row, col, entry, moveId }) => {
   const params = {
-    TableName: "turn-based-game",
+    TableName: "tictactoe-db",
     Key: {
-      gameId: gameId
+      gameId: gameId,
+      moveId: moveId + 1
     },
-    UpdateExpression: `SET lastMoveBy = :user, ${changedHeap} = :changedHeapValue`,
-    ConditionExpression: `(user1 = :user OR user2 = :user) AND lastMoveBy <> :user AND ${changedHeap} > :changedHeapValue`,
+    UpdateExpression: `SET lastMoveBy = :user, game[${row}][${col}] = :entry`,
     ExpressionAttributeValues: {
       ":user": user,
-      ":changedHeapValue": changedHeapValue
+      ":entry": entry
     },
-    ReturnValues: "ALL_NEW"
+    ReturnValues: "ALL_NEW" // This line should be inside the params object
   };
+
   try {
     const resp = await documentClient.update(params).promise();
     return resp.Attributes;
   } catch (error) {
     console.log("Error updating item: ", error.message);
-    throw new Error('Could not perform move')
+    throw new Error('Could not perform move');
   }
 };
 
-module.exports = performMove
+module.exports = performMove;

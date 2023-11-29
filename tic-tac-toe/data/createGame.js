@@ -10,11 +10,11 @@ const createGame = async ({ creator, opponent }) => {
     TableName: "turn-based-game",
     Item: {
       gameId: uuidv4().split('-')[0],
+      moveId: 0,
       user1: creator,
       user2: opponent.username,
-      heap1: 5,
-      heap2: 4,
-      heap3: 5,
+      row: 0,
+      column: 0,
       lastMoveBy: creator
     }
   };
