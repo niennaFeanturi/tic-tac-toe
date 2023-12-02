@@ -10,12 +10,13 @@ const performMove = async ({ gameID, player, row, col, entry}) => {
       gameID: gameID
     },
     UpdateExpression: `SET lastMoveBy = :player, move = move + :1, gameTable[${row}][${col}] = :entry`,
-    ConditionExpression: `(player1 = :player OR player2 = :player) AND NOT (lastMoveBy = :player) AND gameTable[${row}][${col}] = :empty AND move < 9`,
+    ConditionExpression: `(player1 = :player OR player2 = :player) AND NOT (lastMoveBy = :player) AND gameTable[${row}][${col}] = :empty AND move < :moveLimit`,
     ExpressionAttributeValues: {
       ":player": player,
       ":entry": entry,
       ":empty" : " ",
       ":1" : 1,
+      ":moveLimit" : 9
     },
     ReturnValues: 'ALL_NEW'
   }
