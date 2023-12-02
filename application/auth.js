@@ -62,10 +62,10 @@ const fetchUserByUsername = async username => {
     Username: username
   };
   const user = await cognitoidentityserviceprovider.adminGetUser(params).promise();
-  const phoneNumber = user.UserAttributes.filter(attribute => attribute.Name === "phone_number")[0].Value;
+  const email = user.UserAttributes.filter(attribute => attribute.Name === "email")[0].Value;
   return {
     username,
-    phoneNumber
+    email
   };
 };
 

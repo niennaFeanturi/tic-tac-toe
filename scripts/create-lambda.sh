@@ -50,7 +50,8 @@ POLICY=$(aws iam put-role-policy \
           "cognito-idp:AdminConfirmSignUp",
           "cognito-idp:AdminInitiateAuth",
           "cognito-idp:AdminGetUser",
-          "sns:Publish"
+          "sns:Publish",
+          "ses:SendEmail"
         ],
         "Effect": "Allow"
       }

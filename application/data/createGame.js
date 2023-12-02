@@ -31,10 +31,10 @@ const createGame = async ({ creator, opponent }) => {
 
   const message = `Hi ${opponent.username}. Your friend ${creator} has invited you to a new game! Your game ID is ${params.Item.gameId}`;
   try {
-    await sendMessage({ phoneNumber: opponent.phoneNumber, message });
+    await sendMessage({ email: opponent.email, message: message , subject: "You're Invited to Play!"});
   } catch (error) {
     console.log("Error sending message: ", error.message);
-    throw new Error("Could not send message to user");
+    throw new Error("Could not send message to email: ");
   }
 
   return params.Item;

@@ -3,7 +3,7 @@
 const AWS = require('aws-sdk');
 const ses = new AWS.SES({region: 'us-west-2'});
 
-const sendMessage = async ({ email, message }) => {
+const sendMessage = async ({ email, message, subject }) => {
   const params = {
     Destination: {
       BccAddresses: [],
@@ -11,13 +11,13 @@ const sendMessage = async ({ email, message }) => {
       ToAddresses: [email]
     },
     Message: { 
-      Body: { 
+      Body: { /* required */
         Text: {
           Data: message,
         }
       },
       Subject: { 
-        Data: 'TicTacToe!', 
+        Data: subject, 
       }
     },
     Source: 'rudenki@wwu.edu',
