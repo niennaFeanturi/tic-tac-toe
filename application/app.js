@@ -69,7 +69,12 @@ app.post("/games/:gameId", wrapAsync(async (req, res) => {
   }
   const token = await verifyToken(req.header("Authorization"));
   const preGame = await fetchGame(req.params.gameId);
-  let entry = parseInt(preGame.move)%2 === 0 ? "X" : "O";
+  let entry; 
+  if (preGame.move%2 === 0) { 
+    entry = "X";
+  } else {
+    entry = "O";
+  }
   
   const game = await performMove({
     gameId: req.params.gameId,

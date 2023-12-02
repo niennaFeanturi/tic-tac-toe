@@ -6,8 +6,8 @@ const sendMessage = require('./sendMessage')
 //entry is set before move is updated,
 //so use opposite entry after move is posted to check for win
 const checkGame = async (game) => {
-  win = false;
-  gameState = "ongoing";
+  let win = false;
+  let gameState = "ongoing";
   let entry = parseInt(game.move)%2 === 0 ? "O" : "X";
   let b = game.board;
   let r1 = b[0];
@@ -19,7 +19,11 @@ const checkGame = async (game) => {
   let d1 = [b[0][0],b[1][1],b[2][2]];
   let d2 = [b[0][2],b[1][1],b[2][0]];
   let lines = [r1,r2,r3,c1,c2,c3,d1,d2];
-  lines.forEach((l) => if (l[0] === entry && l[1] === entry && l[2] === entry) win = true);
+  lines.forEach(
+    (l) => {
+      if (l[0] === entry && l[1] === entry && l[2] === entry) 
+        win = true;
+    });
   if (win) gameState = "won";
   else if (game.move === 9) gameState = "draw";
   return gameState;
