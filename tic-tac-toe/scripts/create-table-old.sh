@@ -10,6 +10,30 @@ aws dynamodb create-table \
   {
     "AttributeName": "moveId",
     "AttributeType": "N"
+  },
+  {
+    "AttributeName": "user1",
+    "AttributeType": "S"
+  },
+  {
+    "AttributeName": "user2",
+    "AttributeType": "S"
+  },
+  {
+    "AttributeName": "entry",
+    "AttributeType": "S"
+  },
+  {
+    "AttributeName": "row",
+    "AttributeType": "N"
+  },
+  {
+    "AttributeName": "column",
+    "AttributeType": "N"
+  },
+  {
+    "AttributeName": "lastMoveBy",
+    "AttributeType": "S"
   }
 ]' \
 --key-schema '[
