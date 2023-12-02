@@ -4,13 +4,13 @@ aws dynamodb create-table \
    --table-name tictactoe-db \
    --attribute-definitions '[
   {
-    "AttributeName": "gameID",
+    "AttributeName": "gameId",
     "AttributeType": "S"
   }
 ]' \
 --key-schema '[
   {
-    "AttributeName": "gameID",
+    "AttributeName": "gameId",
     "KeyType": "HASH"
   }
 ]' \

@@ -1,7 +1,5 @@
-// Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-// SPDX-License-Identifier: MIT-0
-const AWS = require('aws-sdk')
-const documentClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'})
+const AWS = require("aws-sdk");
+const documentClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'});
 
 const performMove = async ({ gameId, user, row, col, entry}) => {
   const params = {
@@ -30,4 +28,4 @@ const performMove = async ({ gameId, user, row, col, entry}) => {
   }
 };
 
-performMove({ gameId: '5b5ee7d8', user: 'p2', row: 2, col: 1, entry: 'O'})
+module.exports = performMove;

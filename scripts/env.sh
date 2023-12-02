@@ -1,3 +1,0 @@
-export USER_POOL_ID=
-export USER_POOL_ID=us-west-2_teJTqv68h
-export COGNITO_CLIENT_ID=7ehbfn09pph8k9lgs7f6usutv9

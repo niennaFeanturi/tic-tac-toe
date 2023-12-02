@@ -13,8 +13,8 @@ USER_POOL_ID=$(aws cognito-idp create-user-pool \
         }
       }' \
   --schema '[
-      {
-        "Name": "email",
+     {
+        "Name": "phone_number",
         "StringAttributeConstraints": {
             "MinLength": "0",
             "MaxLength": "2048"

@@ -11,13 +11,13 @@ const sendMessage = async ({ email, message }) => {
       ToAddresses: [email]
     },
     Message: { 
-      Body: { /* required */
+      Body: { 
         Text: {
           Data: message,
         }
       },
       Subject: { 
-        Data: 'Your Turn!', 
+        Data: 'TicTacToe!', 
       }
     },
     Source: 'rudenki@wwu.edu',
@@ -25,7 +25,4 @@ const sendMessage = async ({ email, message }) => {
 
   return ses.sendEmail(params).promise();
 };
-
-sendMessage({ email: "irudenk@gmail.com", message: 'Sending a message from SES!'})
-  .then(() => console.log('Sent message successfully'))
-  .catch((error) => console.log('Error sending SES: ', error.message))
+module.exports = sendMessage;
