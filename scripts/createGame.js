@@ -6,13 +6,16 @@ const documentClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'})
 const params = {
   TableName: 'tictactoe-db',
   Item: {
-    gameId: '5b5ee7d8',
-    moveId: 1,
-    user1: 'myfirstuser',
-    user2: 'theseconduser',
-    row: 3,
-    column: 1,
-    lastMoveBy: 'myfirstuser'
+    gameID: '5b5ee7d8',
+    move: 1,
+    player1: 'p1',
+    player2: 'p2',
+    lastMoveBy: 'p1',
+    gameTable: [
+      [" "," "," "],
+      [" "," "," "],
+      ["X"," "," "]
+    ],
   }
 }
 

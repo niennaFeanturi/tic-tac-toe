@@ -1,19 +1,21 @@
 // Copyright 2020 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 const AWS = require('aws-sdk')
-const documentClient = new AWS.DynamoDB.DocumentClient()
+const documentClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'})
 
-const performMove = async ({ gameId, moveId, user, row, col, entry}) => {
+const performMove = async ({ gameID, player, row, col, entry}) => {
   const params = {
-    TableName: 't',
+    TableName: 'tictactoe-db',
     Key: {
-      gameId: gameId,
-      moveId: moveId + 1
+      gameID: gameID
     },
-    UpdateExpression: `SET lastMoveBy = :user, game[${row}][${col}] = :entry`,
+    UpdateExpression: `SET lastMoveBy = :player, move = move + :1, gameTable[${row}][${col}] = :entry`,
+    ConditionExpression: `(player1 = :player OR player2 = :player) AND NOT (lastMoveBy = :player) AND gameTable[${row}][${col}] = :empty AND move < 9`,
     ExpressionAttributeValues: {
-      ":user": user,
-      ":entry": entry
+      ":player": player,
+      ":entry": entry,
+      ":empty" : " ",
+      ":1" : 1,
     },
     ReturnValues: 'ALL_NEW'
   }
@@ -25,4 +27,4 @@ const performMove = async ({ gameId, moveId, user, row, col, entry}) => {
   }
 }
 
-performMove({ gameId: '5b5ee7d8', moveId: 2, user: 'theseconduser', row: 3, col: 1, entry: 'X'})
+performMove({ gameID: '5b5ee7d8', player: 'p2', row: 2, col: 1, entry: 'O'})

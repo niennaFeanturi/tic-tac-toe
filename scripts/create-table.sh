@@ -4,22 +4,14 @@ aws dynamodb create-table \
    --table-name tictactoe-db \
    --attribute-definitions '[
   {
-    "AttributeName": "gameId",
+    "AttributeName": "gameID",
     "AttributeType": "S"
-  },
-  {
-    "AttributeName": "moveId",
-    "AttributeType": "N"
   }
 ]' \
 --key-schema '[
   {
-    "AttributeName": "gameId",
+    "AttributeName": "gameID",
     "KeyType": "HASH"
-  },
-  {
-    "AttributeName": "moveId",
-    "KeyType": "RANGE"
   }
 ]' \
 --provisioned-throughput '{
