@@ -1,6 +1,8 @@
 const AWS = require("aws-sdk");
 const documentClient = new AWS.DynamoDB.DocumentClient({region: 'us-west-2'});
 
+
+
 const performMove = async ({ gameId, user, row, col, entry}) => {
   const params = {
     TableName: 'tictactoe-db',
@@ -8,7 +10,7 @@ const performMove = async ({ gameId, user, row, col, entry}) => {
       gameId: gameId
     },
     UpdateExpression: `SET lastMoveBy = :user, move = move + :1, board[${row}][${col}] = :entry`,
-    ConditionExpression: `(user1 = :user OR user2 = :user) AND NOT (lastMoveBy = :user) AND board[${row}][${col}] = :empty AND move < :moveLimit`,
+    ConditionExpression: `(user1 = :user OR user2 = :user) AND NOT (lastMoveBy = :user) AND board[${row}][${col}] = :empty AND move < :moveLimit AND winner = :empty`,
     ExpressionAttributeValues: {
       ":user": user,
       ":entry": entry,
@@ -18,9 +20,9 @@ const performMove = async ({ gameId, user, row, col, entry}) => {
     },
     ReturnValues: 'ALL_NEW'
   };
-  
+ 
   try {
-    const resp = await documentClient.update(params).promise()
+    let resp = await documentClient.update(params).promise();
     return resp.Attributes;
   } catch (error) {
     console.log('Error updating item: ', error.message);

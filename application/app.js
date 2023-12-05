@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: MIT-0
 const express = require("express");
 const bodyParser = require("body-parser");
-const { createGame, fetchGame, performMove, handlePostMoveNotification } = require("./data");
+const { checkGame, createGame, fetchGame, performMove, handlePostMoveNotification } = require("./data");
 const {
   createCognitoUser,
   login,
@@ -76,13 +76,16 @@ app.post("/games/:gameId", wrapAsync(async (req, res) => {
     entry = "O";
   }
   
-  const game = await performMove({
+  let game = await performMove({
     gameId: req.params.gameId,
     user: token["cognito:username"],
     row: req.body.row,
     col: req.body.col,
     entry: entry
   });
+  
+  game = await checkGame({game});
+  
   let opponentUsername
   if (game.user1 !== game.lastMoveBy) {
     opponentUsername = game.user1

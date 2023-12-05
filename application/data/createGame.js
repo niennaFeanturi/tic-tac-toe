@@ -18,7 +18,8 @@ const createGame = async ({ creator, opponent }) => {
       [" "," "," "],
       [" "," "," "]
       ],
-      lastMoveBy: creator
+      lastMoveBy: creator,
+      winner: " "
     }
   };
 
