@@ -23,3 +23,5 @@ Bugged CLI Commands:
 Fetch game: node cli.js fetch-game --gameId [gameid]
 
 Make move: node cli.js move --gameId [gameId] --user [username] --row [row] --col [column] --entry [X or O]
+
+LINK TO SCREEN RECORDING: https://www.loom.com/share/5907a8ab186046c7bc3c37d756f3a509?sid=fd966442-9295-4ced-8fbd-f6d818e34221
