@@ -13,9 +13,13 @@ users via email. It also doesn't contain the user prompts that would make it mor
 Functional CLI Commands: 
 
 Create user: node cli.js create-user --username [username] --password [password] --email [email]
+
 Login: node cli.js login --username [password] --password [password]
+
 Create game: node cli.js create-game --opponent [opponent's email]
 
 Bugged CLI Commands: 
+
 Fetch game: node cli.js fetch-game --gameId [gameid]
+
 Make move: node cli.js move --gameId [gameId] --user [username] --row [row] --col [column] --entry [X or O]
